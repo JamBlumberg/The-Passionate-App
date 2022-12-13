@@ -26,13 +26,6 @@ struct GamesView: View {
                 print("error fetching games")
             }
         }
-        .task {
-            do {
-                try await PicksFetcher.fetchPicks()
-            } catch {
-                print("error fetching picks")
-            }
-        }
     }
     
     var searchResults: [Game] {
