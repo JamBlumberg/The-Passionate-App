@@ -12,11 +12,18 @@ struct GamesView: View {
                         Text("Date Picked: \(result.datePicked)")
                         Text("Date Graded: \(result.dateGraded)")
                         if let mainGame = result.mainGame {
-                            Text("Main Game: ")
                             NavigationLink {
                                 PicksView(picks: mainGame.picks)
                             } label: {
                                 Text("Main Game Picks")
+                            }
+
+                        }
+                        if let theFlexies = result.theFlexies {
+                            NavigationLink {
+                                PicksView(picks: theFlexies.picks)
+                            } label: {
+                                Text("The Flexies Picks")
                             }
 
                         }

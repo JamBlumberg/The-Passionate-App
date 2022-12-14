@@ -5,15 +5,43 @@ struct PicksView: View {
     
     var body: some View {
         VStack{
+//            List {
+//                ForEach(picks, id: \.text) { pick in
+//                    Section {
+//                        Text(pick.text)
+//                        if let score = pick.score {
+//                            Text("Score: \(String(format: "%.1f", score))")
+//                        }
+//                    } header: {
+//                        Text("Host: \(pick.host)")
+//                    }
+//                }
+//            }
+            
+            let keys = picksByHost().map{ $0.key }
+            let values = picksByHost().map{ $0.value }
             List {
-                ForEach(picks, id: \.text) { pick in
-                    Text("Host: \(pick.host)")
-                    Text(pick.text)
-                    if let score = pick.score {
-                        Text("Score: \(String(format: "%.1f", score))")
+                ForEach(keys.indices) { index in
+                    Section {
+                        ForEach(values[index], id: \.text) { pick in
+                            Text(pick.text)
+                            if let score = pick.score {
+                                Text("Score: \(String(format: "%.1f", score))")
+                            }
+                        }
+                    } header: {
+                        Text(keys[index])
                     }
+
+                    
                 }
             }
         }
+    }
+    
+    func picksByHost() -> [String:[Picks]] {
+        guard !picks.isEmpty else { return [:] }
+        let dictionaryByHost = Dictionary(grouping: picks, by: { $0.host} )
+        return dictionaryByHost
     }
 }
