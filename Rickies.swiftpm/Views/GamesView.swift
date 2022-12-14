@@ -11,6 +11,15 @@ struct GamesView: View {
                         Text("Game Type: \(result.gameType)")
                         Text("Date Picked: \(result.datePicked)")
                         Text("Date Graded: \(result.dateGraded)")
+                        if let mainGame = result.mainGame {
+                            Text("Main Game: ")
+                            NavigationLink {
+                                PicksView(picks: mainGame.picks)
+                            } label: {
+                                Text("Main Game Picks")
+                            }
+
+                        }
                     } header: {
                         Text(result.name)
                     }

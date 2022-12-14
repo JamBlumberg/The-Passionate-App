@@ -6,9 +6,9 @@ public enum GameType: String, Codable {
 
 public struct MainScore: Codable, Equatable {
     public let host: String
-    public let score: Int
+    public let score: Double
     
-    public init(host: String, score: Int) {
+    public init(host: String, score: Double) {
         self.host = host
         self.score = score
     }
@@ -110,7 +110,7 @@ public struct Game: Codable, Equatable {
         case gameType = "game-type"
         case datePicked = "date-picked"
         case dateGraded = "date-graded"
-        case mainGame
+        case mainGame = "main-game"
         case theFlexies = "the-flexies"
         case nongraded
         case relevantEpisodes = "relevant-episodes"
