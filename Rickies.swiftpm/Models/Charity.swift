@@ -21,11 +21,3 @@ public struct Charity: Codable, Equatable {
         case charityURL = "charity-url"
     }
 }
-
-public struct Charities: Codable, Equatable {
-    public let charities: [Charity]
-    
-    public init(charities: [Charity]) {
-        self.charities = charities
-    }
-}

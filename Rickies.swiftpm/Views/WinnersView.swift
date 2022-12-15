@@ -6,10 +6,8 @@ struct WinnersView: View {
     var body: some View {
         VStack {
             if let winners = state.winners {
-                List { 
-                    Text("Annual:")
-                        .font(.title)
-                    Group {
+                List {
+                    Section {
                         HStack {
                             Spacer()
                             Text("\(winners.annual.winner) the \(winners.annual.title)")
@@ -24,16 +22,17 @@ struct WinnersView: View {
                             Spacer()
                             Text(winners.annual.date)
                             Spacer()
-                        }.listRowSeparator(.hidden, edges: .all)  
+                        }.listRowSeparator(.hidden, edges: .all)
                         HStack {
                             Spacer()
                             Text(winners.annual.social)
                             Spacer()
-                        }.listRowSeparator(.hidden, edges: .all) 
+                        }.listRowSeparator(.hidden, edges: .all)
+                    } header: {
+                        Text("Annual:")
+                            .font(.title)
                     }
-                    Text("Keynote:")
-                        .font(.title)
-                    Group {
+                    Section {
                         HStack {
                             Spacer()
                             Text("\(winners.keynote.winner) the \(winners.keynote.title)")
@@ -48,16 +47,17 @@ struct WinnersView: View {
                             Spacer()
                             Text(winners.keynote.date)
                             Spacer()
-                        }.listRowSeparator(.hidden, edges: .all) 
+                        }.listRowSeparator(.hidden, edges: .all)
                         HStack {
                             Spacer()
                             Text(winners.keynote.social)
                             Spacer()
-                        }.listRowSeparator(.hidden, edges: .all) 
+                        }.listRowSeparator(.hidden, edges: .all)
+                    } header: {
+                        Text("Keynote:")
+                            .font(.title)
                     }
-                    Text("Flexies:")
-                        .font(.title)
-                    Group {
+                    Section {
                         HStack {
                             Spacer()
                             Text("\(winners.flexies.winner) the \(winners.flexies.title)")
@@ -67,12 +67,15 @@ struct WinnersView: View {
                             Spacer()
                             Text(winners.flexies.gameName)
                             Spacer()
-                        }.listRowSeparator(.hidden, edges: .all) 
+                        }.listRowSeparator(.hidden, edges: .all)
                         HStack {
                             Spacer()
                             Text(winners.flexies.date)
                             Spacer()
-                        }.listRowSeparator(.hidden, edges: .all) 
+                        }.listRowSeparator(.hidden, edges: .all)
+                    } header: {
+                        Text("Flexies:")
+                            .font(.title)
                     }
                 }
             }
@@ -82,7 +85,7 @@ struct WinnersView: View {
                 do {
                     try await WinnersFetcher.fetchWinners()
                 } catch {
-                    print("Error occurred")
+                    print("Error fetching winners")
                 }
             }
     }

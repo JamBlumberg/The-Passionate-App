@@ -13,12 +13,12 @@ struct ContentView: View {
                         .font(.title)
                 }
                 // Unused for now as Charity link on rickies.net results in 404
-//                NavigationLink(destination: { 
-//                    CharitiesView(state: state)
-//                }) { 
-//                    Text("Charitable Donations")
-//                        .font(.title)
-//                }
+                NavigationLink(destination: { 
+                    CharitiesView(state: state)
+                }) { 
+                    Text("Charitable Donations")
+                        .font(.title)
+                }
                 NavigationLink(destination: { 
                     EpisodesView(state: state)
                 }) { 

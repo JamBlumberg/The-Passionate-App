@@ -2,26 +2,44 @@ import SwiftUI
 
 struct CharitiesView: View {
     @ObservedObject var state: AppState
+    @State var searchText: String = ""
     var body: some View {
-        Text("Charitable Donations")
-            .font(.title)
-            .task {
-                do {
-                    try await CharitiesFetcher.fetchCharities()
-                } catch {
-                    print("error fetching charities")
+        VStack {
+            List {
+                ForEach(searchResults, id: \.charityName) { charity in
+                    Section {
+                        Text(charity.charityURL)
+                        Text("Donator: \(charity.donator)")
+                        Text("Donation Amount: $\(charity.donation)")
+                        Text(charity.game)
+                    } header: {
+                        Text(charity.charityName)
+                    }
                 }
             }
-        
-        if let charities = state.charities {
-            ForEach(charities.charities.indices) {index in 
-                let charity = charities.charities[index]
-                Text(charity.charityName)
-                Text(charity.charityURL)
-                Text(charity.donator)
-                Text("\(charity.donation)")
-                Text(charity.game)
+        }
+        .searchable(text: $searchText, prompt: "Search by donator, charity or game")
+        .task {
+            do {
+                try await CharitiesFetcher.fetchCharities()
+            } catch {
+                print("error fetching charities")
             }
+        }
+        .navigationTitle(Text("Charitable Donations"))
+    }
+    
+    var searchResults: [Charity] {
+        if searchText.isEmpty {
+            return state.charities ?? []
+        } else {
+            if let charities = state.charities {
+                return charities.filter { charity in
+                    charity.charityName.contains(searchText) ||
+                    charity.donator.contains(searchText) ||
+                    charity.game.contains(searchText)
+                }
+            } else  { return [] }
         }
     }
 }
