@@ -4,7 +4,7 @@ struct PicksView: View {
     @State var picks: [Picks]
     
     var body: some View {
-        VStack{
+        VStack {
             let keys = picksByHost().map{ $0.key }
             let values = picksByHost().map{ $0.value }
             List {
@@ -22,6 +22,7 @@ struct PicksView: View {
                 }
             }
         }
+        .navigationTitle(Text("Picks"))
     }
     
     func picksByHost() -> [String:[Picks]] {

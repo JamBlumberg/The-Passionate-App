@@ -85,7 +85,7 @@ struct WinnersView: View {
                 do {
                     try await WinnersFetcher.fetchWinners()
                 } catch {
-                    print("Error occurred")
+                    print("Error fetching winners")
                 }
             }
     }
