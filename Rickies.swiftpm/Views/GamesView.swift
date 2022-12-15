@@ -18,13 +18,36 @@ struct GamesView: View {
                             } label: {
                                 Text("Main Game Picks")
                             }
-
+                            if let winner = mainGame.winner {
+                                Text("Main Game Winner: \(winner)")
+                            }
+                            if let coinFlips = mainGame.coinFlips {
+                                if !coinFlips.isEmpty {
+                                    NavigationLink {
+                                        CoinFlipsView(coinFlips: coinFlips)
+                                    } label: {
+                                        Text("Main Game Coin Flips")
+                                    }
+                                }
+                            }
                         }
                         if let theFlexies = result.theFlexies {
                             NavigationLink {
                                 PicksView(picks: theFlexies.picks)
                             } label: {
                                 Text("The Flexies Picks")
+                            }
+                            if let winner = theFlexies.winner {
+                                Text("The Flexies Winner: \(winner)")
+                            }
+                            if let coinFlips = theFlexies.coinFlips {
+                                if !coinFlips.isEmpty {
+                                    NavigationLink {
+                                        CoinFlipsView(coinFlips: coinFlips)
+                                    } label: {
+                                        Text("The Flexies Coin Flips")
+                                    }
+                                }
                             }
                         }
                         if let nongraded = result.nongraded {
