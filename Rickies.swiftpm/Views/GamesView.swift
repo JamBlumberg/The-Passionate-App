@@ -25,12 +25,17 @@ struct GamesView: View {
                             } label: {
                                 Text("The Flexies Picks")
                             }
-
+                        }
+                        if let nongraded = result.nongraded {
+                            NavigationLink {
+                                PicksView(picks: nongraded.picks)
+                            } label: {
+                                Text("Nongraded picks")
+                            }
                         }
                     } header: {
                         Text(result.name)
                     }
-
                 }
             }
         }

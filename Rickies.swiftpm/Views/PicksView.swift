@@ -5,19 +5,6 @@ struct PicksView: View {
     
     var body: some View {
         VStack{
-//            List {
-//                ForEach(picks, id: \.text) { pick in
-//                    Section {
-//                        Text(pick.text)
-//                        if let score = pick.score {
-//                            Text("Score: \(String(format: "%.1f", score))")
-//                        }
-//                    } header: {
-//                        Text("Host: \(pick.host)")
-//                    }
-//                }
-//            }
-            
             let keys = picksByHost().map{ $0.key }
             let values = picksByHost().map{ $0.value }
             List {
@@ -32,8 +19,6 @@ struct PicksView: View {
                     } header: {
                         Text(keys[index])
                     }
-
-                    
                 }
             }
         }

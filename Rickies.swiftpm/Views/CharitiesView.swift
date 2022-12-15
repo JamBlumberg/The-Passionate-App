@@ -3,26 +3,31 @@ import SwiftUI
 struct CharitiesView: View {
     @ObservedObject var state: AppState
     var body: some View {
-        Text("Charitable Donations")
-            .font(.title)
-            .task {
-                do {
-                    try await CharitiesFetcher.fetchCharities()
-                } catch {
-                    print("error fetching charities")
+        VStack {
+            if let charities = state.charities {
+                List {
+                    ForEach(charities, id: \.charityName) { charity in
+                        Section {
+                            Text(charity.charityURL)
+                            Text("Donator: \(charity.donator)")
+                            Text("Donation Amount: $\(charity.donation)")
+                            Text(charity.game)
+                        } header: {
+                            Text(charity.charityName)
+                        }
+                    }
                 }
             }
-        
-        if let charities = state.charities {
-            ForEach(charities.charities.indices) {index in 
-                let charity = charities.charities[index]
-                Text(charity.charityName)
-                Text(charity.charityURL)
-                Text(charity.donator)
-                Text("\(charity.donation)")
-                Text(charity.game)
+        }
+        .font(.title)
+        .task {
+            do {
+                try await CharitiesFetcher.fetchCharities()
+            } catch {
+                print("error fetching charities")
             }
         }
+        .navigationTitle(Text("Charitable Donations"))
     }
 }
 
