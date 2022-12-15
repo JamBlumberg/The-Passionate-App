@@ -1,3 +1,6 @@
+import Foundation
+
+
 public enum GameType: String, Codable {
     case keynote = "Keynote"
     case annual = "Annual"
@@ -90,12 +93,14 @@ public struct Nongraded: Codable, Equatable {
     }
 }
 
-public struct RelevantEpisodes: Codable, Equatable {
+public struct RelevantEpisodes: Codable, Equatable, Identifiable {
+    public var id: UUID?
     public let title: String
     public let url: String
     public let episodeNumber: Int?
     
-    public init(title: String, url: String, episodeNumber: Int?) {
+    public init(id: UUID? = UUID(), title: String, url: String, episodeNumber: Int?) {
+        self.id = id
         self.title = title
         self.url = url
         self.episodeNumber = episodeNumber
