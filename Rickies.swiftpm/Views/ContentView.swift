@@ -6,24 +6,36 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
+                
                 NavigationLink(destination: { 
                     WinnersView(state: state)
-                }) { 
-                    Text("Current Winners")
-                        .font(.title)
+                }) {
+                    HStack {
+                        Text("Current Winners")
+                            .font(.title)
+                        Image(systemName: "trophy.circle")
+                            .font(.title)
+                    }
                 }
-                // Unused for now as Charity link on rickies.net results in 404
                 NavigationLink(destination: { 
                     CharitiesView(state: state)
                 }) { 
-                    Text("Charitable Donations")
-                        .font(.title)
+                    HStack {
+                        Text("Charitable Donations")
+                            .font(.title)
+                        Image(systemName: "dollarsign.circle")
+                            .font(.title)
+                    }
                 }
                 NavigationLink(destination: { 
                     EpisodesView(state: state)
                 }) { 
-                    Text("Episodes")
-                        .font(.title)
+                    HStack {
+                        Text("Episodes")
+                            .font(.title)
+                        Image(systemName: "headphones.circle")
+                            .font(.title)
+                    }
                 }
                 // Unused for now as Bill Changes are formatted in HTML with internal links to other areas on rickies.net, which is non-trivial to resolve in the app 
 //                NavigationLink(destination: { 
@@ -35,8 +47,12 @@ struct ContentView: View {
                 NavigationLink(destination: { 
                     GamesView(state: state)
                 }) { 
-                    Text("Past Games")
-                        .font(.title)
+                    HStack {
+                        Text("Past Games")
+                            .font(.title)
+                        Image(systemName: "calendar.circle")
+                            .font(.title)
+                    }
                 }
             }
             .navigationTitle("The Rickies")

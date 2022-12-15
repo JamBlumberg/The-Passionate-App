@@ -4,6 +4,7 @@ struct GamesView: View {
     @ObservedObject var state: AppState
     @State var searchText: String = ""
     @State var reverse: Bool = false
+    @State var relevantEpisode: RelevantEpisodes?
     var body: some View {
         VStack {
             List {
@@ -57,6 +58,22 @@ struct GamesView: View {
                                 Text("Nongraded picks")
                             }
                         }
+                        if let relevantEpisodes = result.relevantEpisodes {
+                            ScrollView(.horizontal) {
+                                HStack {
+                                    Text("Relevant Episodes: ")
+                                    ForEach(relevantEpisodes, id: \.title) { episode in
+                                        Button {
+                                            Task {
+                                                relevantEpisode = episode
+                                            }
+                                        } label: {
+                                            Text("\(episode.title)  |")
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     } header: {
                         Text(result.name)
                     }
@@ -80,6 +97,11 @@ struct GamesView: View {
                 try await GamesFetcher.fetchGames()
             } catch {
                 print("error fetching games")
+            }
+        }
+        .sheet(item: $relevantEpisode) { episode in
+            if let url = URL(string: episode.url) {
+                SafariView(url: url)
             }
         }
     }
