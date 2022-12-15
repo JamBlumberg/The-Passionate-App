@@ -38,6 +38,13 @@ public struct MainGame: Codable, Equatable {
         self.scores = scores
         self.winner = winner
     }
+    
+    private enum CodingKeys: String, CodingKey {
+        case picks
+        case coinFlips = "coin-flips"
+        case scores
+        case winner
+    }
 }
 
 public struct TheFlexies: Codable, Equatable {
@@ -59,6 +66,17 @@ public struct TheFlexies: Codable, Equatable {
         self.donation = donation
         self.donator = donator
         self.winner = winner
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case picks
+        case coinFlips = "coin-flips"
+        case scores
+        case charityName = "charity-name"
+        case charityURL = "charity-url"
+        case donation
+        case donator
+        case winner
     }
 }
 
